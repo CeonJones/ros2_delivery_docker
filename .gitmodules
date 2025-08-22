@@ -1,0 +1,15 @@
+[submodule "drone_interfaces"] 
+  path = drone_interfaces
+  url = https://github.com/jn89b/drone_interfaces
+[submodule "drone_ros"] 
+  path = drone_ros 
+  url = https://github.com/jn89b/drone_ros
+[submodule "pew_pew"]
+  path = pew_pew
+  url = https://github.com/jn89b/pew_pew.git
+[submodule "ros2_template_package"]
+	path = ros2_template_package
+	url = https://github.com/jn89b/ros2_template_package.git
+[submodule "rviz_drone"]
+	path = rviz_drone
+	url = https://github.com/jn89b/rviz_drone.git

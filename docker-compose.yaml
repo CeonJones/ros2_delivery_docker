@@ -1,0 +1,75 @@
+services:
+  # Base image containing dependencies.
+  base:
+    image: template:base
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: base
+    # Interactive shell
+    stdin_open: true
+    tty: true
+    # Networking and IPC for ROS 2
+    network_mode: host
+    ipc: host
+    # Allows graphical programs in the container.
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}       # Set ROS domain ID
+      - ROS_IP=${HOST_IP}                    # Advertise host IP for ROS 2
+    volumes:
+      # Mount the source code and X11 socket for graphical programs.
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    command: sleep infinity
+    logging:
+      options:
+        max-size: 50m # maximum size of log file before rotation
+
+  # develop image containing the example source code.
+  develop:
+    extends: base
+    image: template:develop
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: develop
+    # Interactive shell
+    stdin_open: true
+    tty: true
+    privileged: true
+    # Networking and IPC for ROS 2
+    network_mode: host
+    ipc: host
+    # (Port definitions are optional with host networking; they're typically unnecessary)
+    ports:
+      - "10000:10000"
+      - "14550:14550"
+      - "14551:14551"
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}       # Set ROS domain ID
+      - ROS_IP=${HOST_IP}                    # Advertise host IP for ROS 2
+    devices:
+      - "/dev/ttyACM0:/dev/ttyACM0"  # Port for the Pixhawk
+      - "/dev/gpiochip0:/dev/gpiochip0"
+      - "/dev/gpiochip4:/dev/gpiochip4" # Add additional lines as needed
+    volumes:
+      - ./ros_mpc:/develop_ws/src/ros_mpc:rw
+      - ./drone_ros:/develop_ws/src/drone_ros:rw
+      - ./drone_interfaces:/develop_ws/src/drone_interfaces:rw
+      - ./pew_pew:/develop_ws/src/pew_pew:rw
+      - ./ros2_template_package:/develop_ws/src/ros2_template_package:rw
+      - ./apmuas_ros:/develop_ws/src/apmuas_ros:rw
+      - ./rviz_drone:/develop_ws/src/rviz_drone:rw
+      # - ./optimization:/develop_ws/src/optimization:rw
+      - ./useful_shell_scripts:/develop_ws/useful_shell_scripts:rw
+      # - ./unity_robotics_demo:/develop_ws/src/unity_robotics_demo:rw
+      # - ./unity_robotics_demo_msgs:/develop_ws/src/unity_robotics_demo_msgs:rw
+    command: sleep infinity
+    logging:
+      options:
+        max-size: 50m # maximum size of log file before rotation
