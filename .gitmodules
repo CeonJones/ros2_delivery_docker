@@ -13,3 +13,9 @@
 [submodule "rviz_drone"]
 	path = rviz_drone
 	url = https://github.com/jn89b/rviz_drone.git
+[submodule "precision_delivery"]
+	path = precision_delivery
+	url = https://github.com/CeonJones/precision_delivery.git
+[submodule "ros2_sid"]
+	path = ros2_sid
+	url = https://github.com/Xander-Mosley/ros2_sid.git
