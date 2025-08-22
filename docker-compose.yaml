@@ -63,7 +63,9 @@ services:
       - ./drone_interfaces:/develop_ws/src/drone_interfaces:rw
       - ./pew_pew:/develop_ws/src/pew_pew:rw
       - ./ros2_template_package:/develop_ws/src/ros2_template_package:rw
-      - ./apmuas_ros:/develop_ws/src/apmuas_ros:rw
+      - ./precision_delivery:/develop_ws/src/precision_delivery:rw
+      - ./ros2_sid:/develop_ws/src/ros2_sid:rw
+      # - ./apmuas_ros:/develop_ws/src/apmuas_ros:rw
       - ./rviz_drone:/develop_ws/src/rviz_drone:rw
       # - ./optimization:/develop_ws/src/optimization:rw
       - ./useful_shell_scripts:/develop_ws/useful_shell_scripts:rw
