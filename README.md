@@ -71,6 +71,46 @@ In the **docker-compose.yaml** to extend volumes from your host directory add th
       options:
         max-size: 50m # maximum size of log file before rotation
 ```
+## Creating new packages
+When creating a new package, make sure you are outside of any docker container. It is best to copy an existing package to use as a template
+ - Extend the volumes in docker-compose.yml as shown in previous step
+ - In the `package.xml` change the name
+ ```xml
+ <package format="3">
+  <name>CHANGE THIS</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="jnguyenblue2804@gmail.com">justin</maintainer>
+  <license>TODO: License declaration</license>
+  ```
+  When you add new nodes/scripts to your package add them to the executables in your `CMakeLists.txt` like this
+  ```txt
+  # Install Python modules
+ament_python_install_package(${PROJECT_NAME})
+# Install Python executables
+install(PROGRAMS
+  scripts/pub_example.py
+  scripts/sub_example.py
+  scripts/goal_vis.py
+  scripts/target_estimator.py
+  scripts/guidance_publisher.py
+  scripts/testingsignals_SINL.py
+  # scripts/client_member_function.py
+  # scripts/service_member_function.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+ament_package()
+```
+Rebuild the container using 
+```
+docker compose build
+``` 
+Enter the container, ensure you are in root directory and run 
+```
+colcon build --symlink-install
+source install/setup.bash
+```
+
 ## Helpful Shell Scripts/Commands
 ### Cleaning Dangling Containers
 If you ever notice that you have a lot of dangling Docker containers run the following shell command
