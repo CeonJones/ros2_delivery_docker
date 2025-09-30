@@ -1,5 +1,5 @@
-#FROM ros:humble-ros-core-jammy AS base
-FROM osrf/ros:humble-desktop-full AS base 
+FROM ros:humble-ros-core-jammy AS base
+#FROM osrf/ros:humble-desktop-full AS base 
 
 # Install all dependencies in one layer and clean up apt caches
 RUN apt-get update && \
