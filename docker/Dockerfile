@@ -14,6 +14,10 @@ RUN apt-get update && \
     python3-vcstool \
     vim \
     ros-humble-mavros \
+    ros-humble-rosbag2 \
+    ros-humble-ros2bag \
+    ros-humble-rosbag2-storage-default-plugins \
+    ros-humble-rosbag2-compression-zstd \
     wget \
     libblas-dev \
     liblapack-dev \
