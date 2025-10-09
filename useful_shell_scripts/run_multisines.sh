@@ -2,14 +2,14 @@
 
 # Adding this section to see if we can fix the usb port issues. If nothing ever happens that means it was never able to find the port
 # Make sure the script exits on error
-set -e
+#set -e
 
 # Wait for /dev/ttyACM0 to appear
-echo "Waiting for USB device /dev/ttyACM0..."
-while [ ! -e /dev/ttyACM0 ]; do
-    sleep 1
-done
-echo "Device found! Starting scripts..."
+#echo "Waiting for USB device /dev/ttyACM0..."
+#while [ ! -e /dev/ttyACM0 ]; do
+#    sleep 1
+#done
+#echo "Device found! Starting scripts..."
 
 # =========================================================
 # Precision Delivery Automation Script
