@@ -33,7 +33,7 @@ RUN apt-get update && \
     systemd && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Python packages testing changing this comment
+# Install Python packages
 RUN pip install casadi pymavlink pyserial pyyaml pandas shapely matplotlib numba scipy
 
 # GeographicLib datasets installation
@@ -91,6 +91,19 @@ RUN cd /develop_ws/ \
 COPY ./docker/entrypoint.sh ./useful_shell_scripts/run_mavros_router.sh /
 COPY ./useful_shell_scripts/run_live.sh /
 
+# Will test to see if we can add our RUN commands after everything that already exists.
+WORKDIR /develop_ws
+COPY ./useful_shell_scripts/run_multisines.sh ./
+RUN chmod +x run_multisines.sh
+
+CMD ["/run_multisines.sh"]
+
+
+
 WORKDIR /develop_ws
 
 ENTRYPOINT ["/bin/bash","/entrypoint.sh" ]
+
+
+
+
