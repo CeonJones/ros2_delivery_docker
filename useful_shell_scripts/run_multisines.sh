@@ -1,16 +1,4 @@
 #!/bin/bash
-
-# Adding this section to see if we can fix the usb port issues. If nothing ever happens that means it was never able to find the port
-# Make sure the script exits on error
-#set -e
-
-# Wait for /dev/ttyACM0 to appear
-#echo "Waiting for USB device /dev/ttyACM0..."
-#while [ ! -e /dev/ttyACM0 ]; do
-#    sleep 1
-#done
-#echo "Device found! Starting scripts..."
-
 # =========================================================
 # Precision Delivery Automation Script
 # Starts tmux with MAVROS + signal pub/sub + rosbag
@@ -29,10 +17,6 @@ tmux kill-session -t $SESSION 2>/dev/null
 
 # Start new tmux session (detached)
 tmux new-session -d -s $SESSION -n main
-
-# Attempting to add manual commands to .sh file
-tmux send-keys -t $SESSION:0.0 "colcon build --symlink-install" C-m
-tmux send-keys -t $SESSION:0.0 "cp -r data/ install/precision_delivery/share/precision_delivery/" C-m
 
 # ---------------------------------------------------------
 # Pane 0 (top left) – MAVROS Node
