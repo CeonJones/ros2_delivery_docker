@@ -1,35 +1,24 @@
 #!/bin/bash
+set -e  # Exit immediately if any command fails
 
-# Adding this section to see if we can fix the usb port issues. If nothing ever happens that means it was never able to find the port
-# Make sure the script exits on error
-#set -e
+echo "Starting container preparation..."
 
-# Wait for /dev/ttyACM0 to appear
-#echo "Waiting for USB device /dev/ttyACM0..."
-#while [ ! -e /dev/ttyACM0 ]; do
-#    sleep 1
-#done
-#echo "Device found! Starting scripts..."
+# Optional: Wait for USB device
+# echo "Waiting for USB device /dev/ttyACM0..."
+# while [ ! -e /dev/ttyACM0 ]; do
+#     sleep 1
+# done
+# echo "Device found!"
 
-SESSION="Container_Prep"
+# --- Build workspace ---
+echo "Starting colcon build..."
+colcon build --symlink-install
+echo "Colcon build finished."
 
-# Kill existing session if it exists
-tmux kill-session -t $SESSION 2>/dev/null
-
-# Start new tmux session (detached)
-tmux new-session -d -s $SESSION -n main
-
-# Attempting to add manual commands to .sh file
-# Split vertically (top/bottom)
-tmux send-keys -t $SESSION:0.0 "echo 'Starting colcon...'" C-m
-tmux send-keys -t $SESSION:0.0 "colcon build --symlink-install" C-m
-
-tmux send-keys -t $SESSION:0.0 "echo 'Copying CSV File...'" C-m
-tmux send-keys -t $SESSION:0.0 "cp -r data/ install/precision_delivery/share/precision_delivery/" C-m
-
-tmux attach -t $SESSION
-
-tmux send-keys -t $SESSION:0.0 "exit" C-m
+# --- Copy CSV files ---
+echo "Copying CSV files..."
+cp -r data/ install/precision_delivery/share/precision_delivery/
+echo "CSV files copied."
 
 # --- Run multisines script automatically ---
 if [ -x "./run_multisines.sh" ]; then
