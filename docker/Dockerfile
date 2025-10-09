@@ -98,8 +98,8 @@ COPY ./useful_shell_scripts/run_prepare_container.sh ./
 RUN chmod +x run_prepare_container.sh
 COPY ./useful_shell_scripts/run_multisines.sh ./
 RUN chmod +x run_multisines.sh
-
-CMD ["bash", "-c", "./run_prepare_container.sh && ./run_multisines.sh"]
+CMD ["./run_prepare_container.sh"]
+#CMD ["bash", "-c", "./run_prepare_container.sh && ./run_multisines.sh"]
 
 WORKDIR /develop_ws
 
