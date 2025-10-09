@@ -25,6 +25,6 @@ tmux send-keys -t $SESSION:0.0 "echo 'Starting colcon...'" C-m
 tmux send-keys -t $SESSION:0.0 "colcon build --symlink-install" C-m
 
 tmux send-keys -t $SESSION:0.0 "echo 'Copying CSV File...'" C-m
-tmux send-keys -t $SESSION:0.0 "cp -r data/ install/precision_delivery/share/precision_delivery/" 
+tmux send-keys -t $SESSION:0.0 "cp -r data/ install/precision_delivery/share/precision_delivery/" C-m
 
 tmux attach -t $SESSION
