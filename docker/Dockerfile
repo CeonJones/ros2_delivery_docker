@@ -33,7 +33,7 @@ RUN apt-get update && \
     systemd && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Python packages
+# Install Python packages testing changing this comment
 RUN pip install casadi pymavlink pyserial pyyaml pandas shapely matplotlib numba scipy
 
 # GeographicLib datasets installation
