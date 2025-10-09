@@ -96,12 +96,11 @@ COPY ./useful_shell_scripts/run_live.sh /
 WORKDIR /develop_ws
 COPY ./useful_shell_scripts/run_prepare_container.sh ./
 COPY ./useful_shell_scripts/run_multisines.sh ./
-RUN chmod +x run_prepare_container.sh run_multisines.sh
-CMD ["./run_prepare_container.sh"]
-
-
-#CMD ["./run_prepare_container.sh"]
-#CMD ["bash", "-c", "./run_prepare_container.sh && ./run_multisines.sh"]
+COPY ./useful_shell_scripts/entrypoint.sh ./
+# Make scripts executable
+RUN chmod +x run_prepare_container.sh run_multisines.sh entrypoint.sh
+# Set the entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
 
 WORKDIR /develop_ws
 
