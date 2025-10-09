@@ -28,7 +28,8 @@ tmux send-keys -t $SESSION:0.0 "echo 'Copying CSV File...'" C-m
 tmux send-keys -t $SESSION:0.0 "cp -r data/ install/precision_delivery/share/precision_delivery/" C-m
 
 tmux attach -t $SESSION
-tmux kill-session -t $SESSION 2>/dev/null
+
+tmux send-keys -t $SESSION:0.0 "exit" C-m
 
 # --- Run multisines script automatically ---
 if [ -x "./run_multisines.sh" ]; then
