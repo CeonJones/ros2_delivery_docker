@@ -106,7 +106,3 @@ CMD ["./run_prepare_container.sh"]
 WORKDIR /develop_ws
 
 ENTRYPOINT ["/bin/bash","/entrypoint.sh" ]
-
-
-
-

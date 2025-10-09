@@ -11,10 +11,6 @@
 #done
 #echo "Device found! Starting scripts..."
 
-set -e  # Exit immediately if any command fails
-
-echo "Starting container preparation..."
-
 SESSION="Container_Prep"
 
 # Kill existing session if it exists
@@ -32,10 +28,6 @@ tmux send-keys -t $SESSION:0.0 "echo 'Copying CSV File...'" C-m
 tmux send-keys -t $SESSION:0.0 "cp -r data/ install/precision_delivery/share/precision_delivery/" C-m
 
 tmux attach -t $SESSION
-
-
-
-echo "Preparation complete."
 
 # --- Run multisines script automatically ---
 if [ -x "./run_multisines.sh" ]; then
