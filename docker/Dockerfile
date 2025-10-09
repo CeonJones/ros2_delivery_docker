@@ -94,14 +94,13 @@ COPY ./useful_shell_scripts/run_live.sh /
 # Will test to see if we can add our RUN commands after everything that already exists.
 
 WORKDIR /develop_ws
+# Copy your scripts into the container
 COPY ./useful_shell_scripts/run_prepare_container.sh ./
 COPY ./useful_shell_scripts/run_multisines.sh ./
-COPY ./useful_shell_scripts/entrypoint.sh ./
+COPY ./docker/entrypoint.sh ./
+
 # Make scripts executable
 RUN chmod +x run_prepare_container.sh run_multisines.sh entrypoint.sh
+
 # Set the entrypoint
 ENTRYPOINT ["./entrypoint.sh"]
-
-WORKDIR /develop_ws
-
-ENTRYPOINT ["/bin/bash","/entrypoint.sh" ]
