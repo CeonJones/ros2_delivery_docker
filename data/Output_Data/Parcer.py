@@ -224,6 +224,12 @@ def parse_altitude(msg, relative_time):
         'altitude': msg.data
     }
 
+def parse_sid_lab(msg, relative_time):
+    return {
+        'timestamp': relative_time,
+        'output_measurement': msg.data.rssi
+    }
+
 def parse_ros_message(label, msg, relative_time):
     if label.startswith('ols'):
         return parse_ols(label, msg, relative_time)
@@ -242,6 +248,8 @@ def parse_ros_message(label, msg, relative_time):
             return parse_gps(msg, relative_time)
         case 'altitude':
             return parse_altitude(msg, relative_time)
+        case 'sid_lab':
+            return parse_sid_lab(msg, relative_time)
         case _:
             base = {'timestamp': relative_time}
             if hasattr(msg, 'data') and isinstance(msg.data, (list, tuple, np.ndarray, array.array)):
@@ -256,25 +264,15 @@ def parse_ros_message(label, msg, relative_time):
 # ————————————————————————————————————————————————————————————
 
 if __name__ == "__main__":
-    bag_file = '/develop_ws/bag_files/flighttest_2025_08_13_redo/rosbag2_2025_09_03-18_31_25_0.db3'
+    bag_file = '/develop_ws/data/Output_Data/ros2bag/ros2bag_0.db3'
     
     topics_to_extract = {
-        '/mavros/imu/data': 'imu',
-        '/mavros/rc/out': 'rcout',
-        '/mavros/rc/in': 'rcin',
-        '/trajectory': 'trajectory',
-        '/mavros/global_position/rel_alt': 'altitude',
-        '/mavros/local_position/odom': 'odometry',
-        '/ols_rol': 'ols_rol',
-        '/ols_pit': 'ols_pit',
-        '/ols_yaw': 'ols_yaw',
-        '/ols_rol_large': 'ols_rol_large',
-        '/ols_rol_yaw': 'ols_rol_yaw'
+        '/mavros/rc/in': 'sid_lab'
     }
 
 # ————————————————————————————————————————————————————————————
 
-    output_directory_path = '/develop_ws/bag_files/topic_data_files'
+    output_directory_path = '/develop_ws/data/Output_Data'
 
     nanoseconds_per_second = 1e9
     tolerance = 0.1
