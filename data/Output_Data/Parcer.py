@@ -227,7 +227,7 @@ def parse_altitude(msg, relative_time):
 def parse_sid_lab(msg, relative_time):
     return {
         'timestamp': relative_time,
-        'output_measurement': msg.data.rssi
+        'output_measurement': msg.rssi
     }
 
 def parse_ros_message(label, msg, relative_time):
