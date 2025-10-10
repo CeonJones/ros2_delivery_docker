@@ -16,6 +16,7 @@
 [submodule "precision_delivery"]
 	path = precision_delivery
 	url = https://github.com/CeonJones/precision_delivery.git
+	branch = SID_Lab
 [submodule "ros2_sid"]
 	path = ros2_sid
 	url = https://github.com/Xander-Mosley/ros2_sid.git

@@ -98,6 +98,10 @@ WORKDIR /develop_ws
 COPY ./useful_shell_scripts/run_prepare_container.sh ./
 COPY ./useful_shell_scripts/run_multisines.sh ./
 COPY ./docker/entrypoint.sh ./
+# Copy data folder into container
+COPY ./data/Input_Data /develop_ws/data/Input_Data
+COPY ./data/Output_Data /develop_ws/data/Output_Data
+
 
 # Make scripts executable
 RUN chmod +x run_prepare_container.sh run_multisines.sh entrypoint.sh
