@@ -65,7 +65,7 @@ services:
       - ./ros2_template_package:/develop_ws/src/ros2_template_package:rw
       - ./precision_delivery:/develop_ws/src/precision_delivery:rw
       - ./ros2_sid:/develop_ws/src/ros2_sid:rw
-      - ./data:/develop_ws/data:rw
+      - ./data:/develop_ws/data:rw # Yogurt our mounted volume for the data
       # - ./apmuas_ros:/develop_ws/src/apmuas_ros:rw
       - ./rviz_drone:/develop_ws/src/rviz_drone:rw
       # - ./optimization:/develop_ws/src/optimization:rw
