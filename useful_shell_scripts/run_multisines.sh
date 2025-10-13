@@ -61,7 +61,8 @@ tmux send-keys -t $SESSION:0.2 "ros2 bag record -o ros2bag /mavros/rc/in" C-m
 
 # signal_pub (bottom right)
 tmux send-keys -t $SESSION:0.3 "echo 'Starting signal_pub...'" C-m
-tmux send-keys -t $SESSION:0.3 "ros2 service call /mavros/set_stream_rate mavros_msgs/srv/StreamRate "{stream_id: 6, message_rate: 50, on_off: true}""
+tmux send-keys -t $SESSION:0.3 \
+  'ros2 service call /mavros/set_message_interval mavros_msgs/srv/MessageInterval "{message_id: 6, message_rate: 50.0}"' C-m
 tmux send-keys -t $SESSION:0.3 "ros2 run precision_delivery signal_pub.py" C-m # Added auto run
 
 # ---------------------------------------------------------
