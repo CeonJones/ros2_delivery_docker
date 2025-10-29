@@ -277,7 +277,8 @@ if __name__ == "__main__":
     bag_file = '/develop_ws/data/Output_Data/ros2bag/ros2bag_0.db3'
     
     topics_to_extract = {
-        '/mavros/rc/in': 'sid_lab'
+        '/mavros/rc/in': 'sid_lab',
+        '/servo_n' : 'sid_cmd'
     }
 
 # ————————————————————————————————————————————————————————————
