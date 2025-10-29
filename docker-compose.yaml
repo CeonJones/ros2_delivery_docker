@@ -68,6 +68,7 @@ services:
       - ./data:/develop_ws/data:rw # Yogurt our mounted volume for the data
       # - ./apmuas_ros:/develop_ws/src/apmuas_ros:rw
       - ./rviz_drone:/develop_ws/src/rviz_drone:rw
+      - ./sid_interface:/develop_ws/src/sid_interface:rw
       # - ./optimization:/develop_ws/src/optimization:rw
       - ./useful_shell_scripts:/develop_ws/useful_shell_scripts:rw
       # - ./unity_robotics_demo:/develop_ws/src/unity_robotics_demo:rw
