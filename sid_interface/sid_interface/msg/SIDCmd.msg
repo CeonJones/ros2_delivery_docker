@@ -2,4 +2,4 @@
 # Custom message combining a header and a Float64MultiArray
 
 std_msgs/Header header
-std_msgs/Float64MultiArray data
+float64[] data
