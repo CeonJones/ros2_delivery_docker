@@ -230,6 +230,13 @@ def parse_sid_lab(msg, relative_time):
         'output_measurement': msg.rssi
     }
 
+def parse_sid_cmd(msg, relative_time):
+    value = float(msg.data[0])
+    return {
+        'timestamp': relative_time,
+        'input': value
+    }
+
 def parse_ros_message(label, msg, relative_time):
     if label.startswith('ols'):
         return parse_ols(label, msg, relative_time)
@@ -250,6 +257,8 @@ def parse_ros_message(label, msg, relative_time):
             return parse_altitude(msg, relative_time)
         case 'sid_lab':
             return parse_sid_lab(msg, relative_time)
+        case 'sid_cmd':
+            return parse_sid_cmd(msg, relative_time)
         case _:
             base = {'timestamp': relative_time}
             if hasattr(msg, 'data') and isinstance(msg.data, (list, tuple, np.ndarray, array.array)):
@@ -260,6 +269,7 @@ def parse_ros_message(label, msg, relative_time):
             else:
                 base[f'{label}_unknown'] = str(msg)
             return base
+ 
 
 # ————————————————————————————————————————————————————————————
 
