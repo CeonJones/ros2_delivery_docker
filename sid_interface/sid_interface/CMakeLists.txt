@@ -39,6 +39,7 @@ find_package(std_msgs REQUIRED)
 #https://answers.ros.org/question/326008/ros2-run-symbol-not-found-on-custom-msg/
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/SIDCmd.msg"
+  "msg/Telem.msg"
   DEPENDENCIES std_msgs
   DEPENDENCIES geometry_msgs
 )

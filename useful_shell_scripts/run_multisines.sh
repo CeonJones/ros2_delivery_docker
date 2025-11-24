@@ -52,12 +52,11 @@ tmux select-layout -t $SESSION tiled
 tmux send-keys -t $SESSION:0.1 "echo 'Starting signal_sub...'" C-m
 tmux send-keys -t $SESSION:0.1 "ros2 run precision_delivery signal_sub.py" C-m
 
-
 # rosbag (bottom left)
 tmux send-keys -t $SESSION:0.2 "echo 'Recording /mavros/rc/in...'" C-m
 tmux send-keys -t $SESSION:0.2 "cd data/Output_Data/" C-m
 # tmux send-keys -t $SESSION:0.2 "sudo rm -rf ros2bag" C-m
-tmux send-keys -t $SESSION:0.2 "ros2 bag record -o ros2bag /mavros/rc/in /servo_n" C-m
+tmux send-keys -t $SESSION:0.2 "ros2 bag record /mavros/rc/in /servo_n" C-m
 
 # signal_pub (bottom right)
 tmux send-keys -t $SESSION:0.3 "echo 'Starting signal_pub...'" C-m

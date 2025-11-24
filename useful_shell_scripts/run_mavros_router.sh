@@ -4,7 +4,7 @@
 SERIAL_DEVICE=${1:-/dev/ttyACM0}
 
 # Assign the second argument to BAUD_RATE, default to 57600 if not provided
-BAUD_RATE=${2:-57600}
+BAUD_RATE=${2:-921600}
 
 # Assign the third argument to IP1, default to 192.168.1.101 if not provided
 # this is the 
@@ -16,8 +16,8 @@ PORT1=${4:-14550}
 # Assign the fifth argument to IP2, default to 127.0.0.1 if not provided
 IP2=${5:-127.0.0.1}
 
-# Assign the sixth argument to PORT2, default to 14550 if not provided
-PORT2=${6:-14550}
+# Assign the sixth argument to PORT2, default to 14550 if not provided 
+PORT2=${6:-14550} 
 PORT3=${7:-14551}
 PORT4=${8:-14552}
 
@@ -31,4 +31,4 @@ echo "Endpoint 3: $IP2:$PORT3"
 echo "Endpoint 4: $IP2:$PORT4"
 
 # Execute mavlink-routerd with the provided settings
-mavlink-routerd -e $IP1:$PORT1 -e $IP2:$PORT2 -e 0.0.0.0:14550 $SERIAL_DEVICE:$BAUD_RATE 
+mavlink-routerd -e $IP1:$PORT1 -e $IP2:$PORT2 -e $IP2:$PORT3 -e $IP2:$PORT4 $SERIAL_DEVICE:$BAUD_RATE 
