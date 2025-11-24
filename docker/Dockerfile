@@ -42,31 +42,13 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
     ./install_geographiclib_datasets.sh && \
     rm install_geographiclib_datasets.sh
 
-# Set up the entrypoint
-COPY ./docker/coinhsl-archive-2022.12.02.tar.gz /
-COPY ./docker/coinhsl-archive-2022.12.02.zip /
-
-RUN gunzip coinhsl-archive-2022.12.02.tar.gz && \
-    tar xf coinhsl-archive-2022.12.02.tar && \
-    mv coinhsl-archive-2022.12.02 coinhsl && \
-    git clone https://github.com/coin-or-tools/ThirdParty-HSL.git && \
-    mv coinhsl /ThirdParty-HSL/ && \
-    cd ThirdParty-HSL && \
-    ./configure -C && \
-    make -j$(nproc-1) && \
-    make install 
-
 # Clone and build ThirdParty-HSL and mavlink-router
 RUN git clone https://github.com/mavlink-router/mavlink-router.git && \
     cd mavlink-router && \
     git submodule update --init --recursive && \
     meson setup build . && \
     ninja -C build && \
-    ninja -C build install && \
-    cd /ThirdParty-HSL && \
-    ./configure -C && \
-    make -j$(nproc) && \
-    make install
+    ninja -C build install 
 
 COPY ./docker/entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
@@ -87,7 +69,7 @@ RUN cd /develop_ws/ \
     && source install/setup.bash  \
     && apt-get update && apt-get install -y tmux 
 
- # Set up the entrypoint
+# Set up the entrypoint
 COPY ./docker/entrypoint.sh ./useful_shell_scripts/run_mavros_router.sh /
 COPY ./useful_shell_scripts/run_live.sh /
 
@@ -95,16 +77,16 @@ COPY ./useful_shell_scripts/run_live.sh /
 
 WORKDIR /develop_ws
 # Copy your scripts into the container
-COPY ./useful_shell_scripts/run_prepare_container.sh ./
-COPY ./useful_shell_scripts/run_multisines.sh ./
+# COPY ./useful_shell_scripts/run_prepare_container.sh ./
+# COPY ./useful_shell_scripts/run_multisines.sh ./
 COPY ./docker/entrypoint.sh ./
-# Copy data folder into container
-COPY ./data/Input_Data /develop_ws/data/Input_Data
-COPY ./data/Output_Data /develop_ws/data/Output_Data
+# # Copy data folder into container
+# COPY ./data/Input_Data /develop_ws/data/Input_Data
+# COPY ./data/Output_Data /develop_ws/data/Output_Data
 
 
 # Make scripts executable
-RUN chmod +x run_prepare_container.sh run_multisines.sh entrypoint.sh
+# RUN chmod +x run_prepare_container.sh run_multisines.sh entrypoint.sh
 
 # Set the entrypoint
 ENTRYPOINT ["./entrypoint.sh"]
