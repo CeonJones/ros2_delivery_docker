@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Assign the first argument to SERIAL_DEVICE, default to /dev/ttyACM0 if not provided
-SERIAL_DEVICE=${1:-/dev/ttyACM0}
+SERIAL_DEVICE=${1:-/dev/ttyAMA0}
 
 # Assign the second argument to BAUD_RATE, default to 57600 if not provided
-BAUD_RATE=${2:-921600}
+BAUD_RATE=${2:-115200}
 
 # Assign the third argument to IP1, default to 192.168.1.101 if not provided
 # this is the 
