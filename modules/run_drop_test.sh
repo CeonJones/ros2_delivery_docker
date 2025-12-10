@@ -1,29 +1,32 @@
+# #!/bin/bash
+
+# SESSION="mypanes"
+
 #!/bin/bash
 
-SESSION="mypanes"
+# Start a new tmux session and window
+tmux new-session -d -s MavrosSession
 
-# Create new tmux session
-tmux new-session -d -s $SESSION
+# Split the window into four horizontal panes
+tmux split-window -h
+tmux split-window -v -t 0
+tmux split-window -v -t 2
 
-### --- Pane 1: MAVProxy --- ###
-tmux send-keys -t $SESSION \
-"mavproxy.py --master=/dev/ttyACM0 --baud=57600 \
+# Navigate and run the script in pane 1
+tmux send-keys -t 0 "mavproxy.py --master=/dev/ttyACM0 --baud=57600 \
  --out=127.0.0.1:14551 \
  --out=127.0.0.1:14552 \
  --out=127.0.0.1:14553" C-m
 
-### --- Split for Pane 2 --- ###
-tmux split-window -h -t $SESSION
-tmux send-keys -t $SESSION:0.1 "python3 servo_signals.py" C-m
+# Run mavros_node in pane 2
+tmux send-keys -t 1 'python3 servo_signals.py' C-m
 
-### --- Split Pane 1 vertically for Pane 3 --- ###
-tmux select-pane -t $SESSION:0.0
-tmux split-window -v -t $SESSION
-tmux send-keys -t $SESSION:0.2 "python3 logger.py" C-m
+# Run Drone.py in pane 3
+tmux send-keys -t 2 'python3 servo_signals.py' C-m
 
-### --- Split Pane 2 vertically for Pane 4 --- ###
-tmux select-pane -t $SESSION:0.1
-tmux split-window -v -t $SESSION
+# Select pane 4
+tmux select-pane -t 'python3 logger.py' C-m
 
-# Attach to the final session
-tmux attach -t $SESSION
+# Attach to the tmux session
+tmux attach-session -d -t MavrosSession
+
